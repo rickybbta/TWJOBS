@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0TKEpxTIq6SM5ze6Y1n/o3EKpuCbpQ7xOhyYmP0qkOLzsfuNRqbmOkznwl6Uya57p8CzQCpdbZmYbzQP5qvF5g==",
+  "dgSpecHash": "KHnvOPUOPyjgB5YtmkW3dpYCMoBcabgq6Gsn41FWIQmi+rdJrfiU5vvfTf6tjSD4PdLONCDv72LShG2sAUbMvg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj",
+  "projectFilePath": "c:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ricardo.gerin\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ricardo.gerin\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
