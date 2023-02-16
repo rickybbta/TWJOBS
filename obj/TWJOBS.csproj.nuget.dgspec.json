@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj": {}
+    "C:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj": {
+    "C:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj",
+        "projectUniqueName": "C:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj",
         "projectName": "TWJOBS",
-        "projectPath": "c:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj",
+        "projectPath": "C:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\TWJOBS.csproj",
         "packagesPath": "C:\\Users\\ricardo.gerin\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\obj\\",
+        "outputPath": "C:\\Users\\ricardo.gerin\\Desktop\\TREINAWEB\\DOTNET\\TWJOBS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ricardo.gerin\\AppData\\Roaming\\NuGet\\NuGet.Config",

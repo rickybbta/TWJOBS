@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using TWJOBS.API.Common.DTOS;
+using TWJOBS.API.Common.Assemblers;
 using TWJOBS.API.Jobs.DTOS;
 using TWJOBS.API.Jobs.Services;
 
@@ -9,50 +9,47 @@ namespace TWJOBS.API.Jobs.Controllers;
 [Route("/api/jobs")]
 public class JobController: ControllerBase{
     private readonly IJobService _jobService;
-    public JobController(IJobService jobService){
+    private readonly IAssembler<JobSummaryResponse> _jobSummaryAssembler;
+    private readonly IAssembler<JobDetailResponse> _jobDetailAssembler;
+    public JobController(
+        IJobService jobService,
+        IAssembler<JobSummaryResponse> jobSummaryAssembler,
+        IAssembler<JobDetailResponse> jobDetailAssembler)
+    {
         _jobService = jobService;
+        _jobSummaryAssembler = jobSummaryAssembler;
+        _jobDetailAssembler = jobDetailAssembler;
     }
 
-    [HttpGet]
+    [HttpGet(Name = "FindAllJobs")]
     public IActionResult FindAll(){
         var body = _jobService.FindAll();
-        foreach (var resource in body){
-            var selflink = new LinkResponse($"/api/jobs/{resource.id}", "GET", "self");
-            var updatelink = new LinkResponse($"/api/jobs/{resource.id}", "PUT", "update");
-            var deletelink = new LinkResponse($"/api/jobs/{resource.id}", "DELETE", "delete");
-            resource.AddLinks(selflink, updatelink, deletelink);
-        }
-        return Ok(body);
+        return Ok(_jobSummaryAssembler.ToResourceCollection(body, HttpContext));
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "FindJobById")]
     public IActionResult FindById([FromRoute] int id){
         var body = _jobService.FindById(id);
-        body.AddLink(new LinkResponse($"/api/jobs/{id}", "GET", "self"));
-        body.AddLink(new LinkResponse($"/api/jobs/{id}", "PUT", "update"));
-        body.AddLink(new LinkResponse($"/api/jobs/{id}", "DELETE", "delete"));
-        return Ok(body);
+        return Ok(_jobDetailAssembler.ToResource(body, HttpContext));
     }
 
-    [HttpPost]
+    [HttpPost(Name = "CreateJob")]
     public IActionResult Create([FromBody] JobRequest jobRequest){
         var body = _jobService.Create(jobRequest);
-        body.AddLink(new LinkResponse($"/api/jobs/{body.id}", "GET", "self"));
-        body.AddLink(new LinkResponse($"/api/jobs/{body.id}", "PUT", "update"));
-        body.AddLink(new LinkResponse($"/api/jobs/{body.id}", "DELETE", "delete"));
-        return CreatedAtAction(nameof(FindById), new { id = body.id }, body);
+        return CreatedAtAction(
+            nameof(FindById),
+            new { id = body.id },
+            _jobDetailAssembler.ToResource(body, HttpContext)
+        );
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id}", Name = "UpdateJobById")]
     public IActionResult UpdateById([FromRoute] int id, [FromBody] JobRequest jobRequest){
         var body = _jobService.UpdateById(id, jobRequest);
-        body.AddLink(new LinkResponse($"/api/jobs/{body.id}", "GET", "self"));
-        body.AddLink(new LinkResponse($"/api/jobs/{body.id}", "PUT", "update"));
-        body.AddLink(new LinkResponse($"/api/jobs/{body.id}", "DELETE", "delete"));
-        return Ok(body);
+        return Ok(_jobDetailAssembler.ToResource(body, HttpContext));
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}", Name = "DeleteJobById")]
     public IActionResult DeleteByid([FromRoute] int id){
         _jobService.DeleteById(id);
         return NoContent();
