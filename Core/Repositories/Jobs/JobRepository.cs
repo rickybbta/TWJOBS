@@ -33,6 +33,16 @@ public class JobRepository : IJobRepository{
         return _context.Jobs.AsNoTracking().ToList();
     }
 
+    public PagedResult<Job> FindAll(PaginationOptions options)
+    {
+        var totalelements = _context.Jobs.Count();
+        var items = _context.Jobs
+            .Skip((options.pagenumber - 1) * options.pagesize)
+            .Take(options.pagesize)
+            .ToList();
+        return new PagedResult<Job>(items, options.pagenumber, options.pagesize, totalelements);
+    }
+
     public Job? FindById(int id){
         return _context.Jobs.AsNoTracking().FirstOrDefault(j => j.id == id);
     }
