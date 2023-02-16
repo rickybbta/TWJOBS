@@ -1,10 +1,11 @@
 using FluentValidation;
-using Microsoft.AspNetCore.Http.HttpResults;
+using TWJOBS.API.Common.DTOS;
 using TWJOBS.API.Jobs.DTOS;
 using TWJOBS.API.Jobs.Mappers;
 using TWJOBS.API.Jobs.Validators;
 using TWJOBS.Core.Exceptions;
 using TWJOBS.Core.Models;
+using TWJOBS.Core.Repositories;
 using TWJOBS.Core.Repositories.Jobs;
 
 namespace TWJOBS.API.Jobs.Services;
@@ -58,5 +59,12 @@ public class JobService : IJobService{
             throw new ModelNotFoundException($"Job with id {id} not found");
         }
         _jobRepository.DeleteById(id);
+    }
+
+    public PagedResponse<JobSummaryResponse> FindAll(int page, int size)
+    {
+        var paginationoptions = new PaginationOptions(page, size);
+        var pagedResult = _jobRepository.FindAll(paginationoptions);
+        return _jobMapper.ToPagedSummaryResponse(pagedResult);
     }
 }

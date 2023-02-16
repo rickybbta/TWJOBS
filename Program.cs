@@ -1,3 +1,4 @@
+using TWJobs.Core.Config;
 using TWJOBS.Core.Config;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.RegisterServices();
 builder.Services.RegisterMappers();
 builder.Services.RegisterValidators();
 builder.Services.RegisterAssemblers();
+builder.Services.RegisterDocumentation();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
